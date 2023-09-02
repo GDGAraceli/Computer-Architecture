@@ -101,7 +101,16 @@ public class PracProbTwoB {
 	
 /*
  * test results:
- * 
+11.359375
+0.359375
+25.0
+0.110000000000000
+1.001111000110101
+10100011.000000000000000
+Base 10 0.1 in base 2: 0.000110011001100
+Binary 0.1 in base 10: 0.0999755859375
+Converting binary 0.1 to base 10: 0.5
+
  * 
  */
 
