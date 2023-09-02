@@ -1,0 +1,89 @@
+/*
+ * conversion from base 10 to binary and back again. Probably really bad performance
+ * but oh well.
+ */
+public class PracProbTwoB {
+
+	public static double convertTo10(String num) {
+		String whole = num.split("\\.")[0];
+		String [] wholeDigits = whole.split(""); // split whole portion into string array w/ chars
+		String fraction = num.split("\\.")[1];
+		String [] fracDigits = fraction.split("");// split fractional portion into string array w/ chars
+		double answer = 0;
+		int exp = 0;
+		// convert whole portion to binary
+		for (int i = wholeDigits.length-1; i >= 0; i--) {
+			if (wholeDigits[i].equals("1")) {
+				answer += Math.pow(2, exp);
+			}
+			exp++;
+		}
+		// convert fractional portion to binary
+		exp = -1;
+		for (int i = 0; i < fracDigits.length; i++) { 
+			if (fracDigits.length != 0 && fracDigits[i].equals("1")) {
+				answer += Math.pow(2, exp);
+			}
+			exp--;
+		}
+		
+		return answer;
+	}
+	public static String convertTo2(double num) {
+	
+		//convert the whole part to binary manually
+		/*
+		String wholeAns = "";
+		if (whole > 0) {
+			while (whole > 0) {
+				wholeAns += whole % 2;
+				whole /= 2;
+			}
+			String [] digits = wholeAns.split("");
+			wholeAns = ""; //reset string
+			for (int i = digits.length-1; i >= 0; i--)
+				wholeAns += digits[i];
+		}*/
+		String wholeAns = Integer.toBinaryString((int)num); //one-line method to convert whole part to binary
+		wholeAns += ".";
+		
+		//convert fractional part to binary, 5 decimal places
+		double frac2 = Double.parseDouble(String.format("%.5f", num%1));
+		for (int i = 0; i < 50; i++) {
+			if (frac2*2 >= 1) {
+				wholeAns += 1;
+				frac2 = frac2*2 - 1;
+			}
+			else
+			{
+				wholeAns += 0;
+				frac2 = frac2*2;
+			}
+		}
+		
+		return wholeAns;
+		
+	}
+	
+	public static void main(String[] args) {
+		
+		// testing conversion to base 10 from binary
+		
+		System.out.println(convertTo10("1011.010111"));
+		System.out.println(convertTo10(".010111"));
+		System.out.println(convertTo10("11001"));
+		
+		// testing conversion to binary from base 10
+		System.out.println(convertTo2(0.75));
+		System.out.println(convertTo2(1.236));
+		System.out.println(convertTo2(163));
+		
+		// testing 0.1
+		System.out.println("Base 10 0.1 in base 2: "+convertTo2(0.1));
+		String test = convertTo2(0.1);
+		System.out.println("Binary 0.1 in base 10: "+convertTo10(test));
+		System.out.println("Converting binary 0.1 to base 10: "+convertTo10("0.1"));
+
+	}
+
+}
