@@ -1,5 +1,5 @@
 /*
- * conversion from base 10 to binary and back again. Probably really bad performance
+ * Written in Java. Conversion from base 10 to binary and back again. Probably really bad performance
  * but oh well.
  */
 public class PracProbTwoB {
